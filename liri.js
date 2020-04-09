@@ -52,7 +52,7 @@ function liriBot(request, userInput) {
   };
 };
 
-//----------------------- FUNCTION TO SEARCH THE SPOTIFY API ----------------------------
+//----------------------- FUNCTION FOR SPOTIFY-THIS-SONG ----------------------------
 function getSpotify(songName) {
 
   //Variable for the Key & Secret for Spotify
@@ -81,7 +81,7 @@ function getSpotify(songName) {
     // adding a line break for clarity of when search results end
     console.log("===============================" + "\r\n");
 
-    // Appends text into log.txt file 
+   //  LOG THE RESULTS IN THE LOG.TXT FILE
     var logSong = "\r\n" + "===== Begin spotify-this-song log entry =====" + "\r\n" + "\nArtist: " + data.tracks.items[0].album.artists[0].name + "\r\n" + "\nSong Name: " + data.tracks.items[0].name + "\r\n" +  "\nSong Preview Link: " + data.tracks.items[0].href + "\r\n" +  "\nAlbum: " + data.tracks.items[0].album.name + "\r\n" + "\n===== End spotify-this-song log entry =====" + "\r\n";
 
     fs.appendFile("log.txt", logSong, function(err) {
@@ -91,7 +91,7 @@ function getSpotify(songName) {
   });
 };
 
-//----------------------- FUNCTION TO SEARCH BANDS IN TOWN API VIA AXIOS ----------------------------
+//----------------------- FUNCTION FOR CONCERT-THIS ----------------------------
 
 function getBandsInTown(artist) {
 
@@ -102,14 +102,15 @@ function getBandsInTown(artist) {
     function (response) {
       // adding a line break for clarity of when search results begin
       console.log("\r\n" + "===============================" + "\r\n");
+      console.log("Name of the musician: " + artist +  "\r\n");
       console.log("Name of the venue: " + response.data[0].venue.name + "\r\n");
       console.log ("Venue Location: " + response.data[0].venue.city + "\r\n");
-      console.log("Date of the event: " + moment(response.data[0].datetime).format("MM-DD-YYYY") + "\r\n");
+      console.log("Date of the event: " + moment(response.data[0].datetime).format("MM-DD-YYYY h:mm a") + "\r\n");
       // adding a line break for clarity of when search results end
       console.log("===============================" + "\r\n");
 
-      //Append text into log.txt file
-      var logConcert = "\n============ Begin concert-this log entry ===========" + "\r\n" + "\nName of the musician: " + artist + "\r\n" + "\nName of the venue: " + response.data[0].venue.name +  "\r\n" + "\nDate of the event: " + moment(response.data[0].datetime).format("MM-DD-YYYY") + "\r\n" + "\n============ End concert-this log entry ============" + "\r\n";
+      //  LOG THE RESULTS IN THE LOG.TXT FILE
+      var logConcert = "\n============ Begin concert-this log entry ===========" + "\r\n" + "\nName of the musician: " + artist + "\r\n" + "\nName of the venue: " + response.data[0].venue.name +  "\r\n" + "\nVenue Location: " + response.data[0].venue.city + "\r\n" + "\nDate of the event: " + moment(response.data[0].datetime).format("MM-DD-YYYY h:mm a") + "\r\n" + "\n============ End concert-this log entry ============" + "\r\n";
 
       fs.appendFile("log.txt", logConcert, function (err) {
         if (err) throw err;
@@ -117,7 +118,7 @@ function getBandsInTown(artist) {
     });
 };
 
-//----------------------- FUNCTION TO SEARCH THE OMDB API VIA AXIOS ----------------------------
+//----------------------- FUNCTION FOR MOVIE-THIS ----------------------------
 
 function getOMDB(movie) {
   //If the user doesn't type a movie in, the program will output data for the movie "Mr. Nobody"
@@ -140,7 +141,7 @@ function getOMDB(movie) {
       console.log("Actors: " + response.data.Actors + "\r\n");
       console.log("===============================" + "\r\n");
 
-      // logResults(response);
+      //  LOG THE RESULTS IN THE LOG.TXT FILE
       var logMovie = "\r\n" + "========== Begin movie-this log entry =======" + "\r\n" + "\nMovie title: " + response.data.Title + "\nYear released: " + response.data.Year + "\nIMDB Rating: " + response.data.imdbRating + "\nRotten Tomatoes Rating: " + response.data.Ratings[1].Value + "\nCountry Where Produced: " + response.data.Country + "\nLanguage: " + response.data.Language + "\nPlot: " + response.data.Plot + "\nActors: " + response.data.Actors + "\r\n" + "\n========== End movie-this log entry =======" + "\r\n";
 
       fs.appendFile("log.txt", logMovie, function (err) {
@@ -149,7 +150,7 @@ function getOMDB(movie) {
 });
 };
 
-// Using the fs Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands
+//----------------------- FUNCTION FOR DO-WHAT-IT-SAYS ----------------------------
 
 function getRandom() {
   fs.readFile("random.txt", "utf8", function (error, data) {
@@ -164,11 +165,12 @@ function getRandom() {
   });
 };
 
-// Function to log results from the other functions
+//  LOG THE RESULTS IN THE LOG.TXT FILE
 function logResults(data) {
   fs.appendFile("log.txt", data, function (err) {
     if(err) throw err;
   });
 };
 
+// RUN IT!
 liriBot(request, userInput)
