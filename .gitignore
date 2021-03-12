@@ -3,4 +3,8 @@ node_modules
 .DS_Store
 .env
 
-# .DS_Store files are used by Mac OS X to store folder specific metadata information. They are created in every folder that Mac OS X Finder accesses, even network volumes and external devices. Folder level customizations are stored in the DS_Store file, things like custom icons, icon placement, icon size, window placement, list views, custom background pictures or colors, etc. DS_Store files are intended to be unobtrusive, which is why they have a . in front of their name, which indicates to UNIX file systems that the file is invisible.
+# .DS_Store files are used by Mac OS X to store folder specific metadata information. 
+# They are created in every folder that Mac OS X Finder accesses, even network volumes and external devices. 
+# Folder level customizations are stored in the DS_Store file, things like custom icons, icon placement, 
+# icon size, window placement, list views, custom background pictures or colors, etc. DS_Store files are intended 
+# to be unobtrusive, which is why they have a . in front of their name, which indicates to UNIX file systems that the file is invisible.

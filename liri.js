@@ -12,8 +12,10 @@ var Spotify = require("node-spotify-api");
 
 // Moment will be used to make the date of the concert (data returned from bands-in-town) look better
 var moment = require("moment");
+
 // Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env
 var dotenv = require("dotenv");
+
 // The fs module provides an API for interacting with the file system 
 var fs = require("fs");
 
